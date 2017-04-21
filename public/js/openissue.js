@@ -152,12 +152,13 @@ var viewdescription = function(description) {
 }
 
 var closeissue = function(key) {
+	
 	//update issue	
 	let Issueref = firebase.database().ref('ist/issue').child(key);
 	  Issueref.once('value', function(snapshot) {
 			if( snapshot.val() != null ) {
 				console.log(snapshot.val());
-	      snapshot.ref.update({"status": "Closed","lastupdate" : gettimestamp(),"timeclose": gettimestamp(),"isnotified":true});
+	      snapshot.ref.update({"status": "open","lastupdate" : gettimestamp(),"timeclose": gettimestamp(),"isnotified":true});
 	      $.post("/notify",{issueid: key},function(data) { 
 	      	console.log(status); 
 	      	if(data) {
@@ -170,6 +171,7 @@ var closeissue = function(key) {
 	      });
 		  }
 		});
+	
 }
 
 
