@@ -166,14 +166,19 @@ var mailTransport = nodemailer.createTransport({
 	});
 
 //sms api
+/** used nexmo, having whitelist error
 const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
   apiKey: 'b97aa1b5',
   apiSecret: 'a0536d3ec5721682'
 });
+**/
+var Jusibe = require('jusibe');
+var jusibe = new Jusibe("b033fe3cf30d7873f208a767d26054c0", "4e07476fa37923e1980b51f05b94747b");
 app.post('/notify', function(req, res){
 
-	let key =req.body.uid,
+
+	let key =req.body.issueid,
 			subject,
 			notifymeans,
 			notifyvalue;
@@ -183,7 +188,6 @@ app.post('/notify', function(req, res){
 			subject =snapshot.val().subject;
 			notifymeans =snapshot.val().sendernotificationmeans;
 			notifyvalue=snapshot.val().notificationvalue;
-			console.log(snapshot.val());
 
 			if (notifymeans == 'email') {
 				res.render('mail/notifymail',	{ layout: null, subject: subject },
@@ -202,22 +206,34 @@ app.post('/notify', function(req, res){
 					}
 				);
 			} else if (notifymeans == 'phone') {
+				console.log(notifyvalue);
 				let text = 'IST notification \n' +
-									'Thanks for using our service to fix your bug./n'+
-									'We have successfully fix you bug on the subject: /n'+
+									'Thanks for using our service to fix your bug.'+
+									'We have successfully fix you bug on the subject: '+
 									subject;
-				nexmo.message.sendSms(config.number, notifyvalue, text, {type: 'unicode'},
+				console.log(text);
+				/** nexmo whitelist erro
+				nexmo.message.sendSms(2348066112787, 2348027313450, text, {type: 'unicode'},
 		    	(err, responseData) => {if (responseData) {console.log(responseData)}}
 		  	);
-
-
+				**/
+				var payload = {
+			    to: notifyvalue,
+			    from: 'Issue Tracker',
+			    message: text
+			  };
+			  console.log(payload);
+			  jusibe.sendSMS(payload, function (err, res) {
+			    if (res.statusCode === 200) {
+			      console.log(res.body);
+			    } else {
+			      console.log(err);
+			    }
+			  });
 			}
 
 	  }
 	});
-
-	
-	//res.render('mail/cart-thank-you',{ layout: null,  name: 'nkem',number:'07032955135'});
 });
 
 // 404 catch-all handler (middleware)
