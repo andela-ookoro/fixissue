@@ -14,7 +14,7 @@
   * An admin can close or reopen an issue ticket
   * A user would be notified via mail or SMS
   * An admin can view open and close issue
-*  Click [here](http://vistagrid.herokuapp.com/) to access the app on Heroku
+*  Click [here](https://issuetrackerh20.herokuapp.com/) to access the app on Heroku
 
 ## Dependencies
 
@@ -44,7 +44,4 @@
 
 *  Install the app's backend dependencies.On node enter.
   *  `npm install `
-
-
-
 
