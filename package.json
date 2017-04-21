@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/celelstine/bc-20-issuetracker.git"
+    "url": "git+https://github.com/celelstine/bc-20-issuetrackersystem.git"
   },
   "keywords": [
     "issue",
@@ -17,9 +17,9 @@
   "author": "okorocelestine@gmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/celelstine/bc-20-issuetracker/issues"
+    "url": "https://github.com/celelstine/bc-20-issuetrackersystem/issues"
   },
-  "homepage": "https://github.com/celelstine/bc-20-issuetracker#readme",
+  "homepage": "https://github.com/celelstine/bc-20-issuetrackersystem#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
