@@ -158,13 +158,16 @@ var closeissue = function(key) {
 	  Issueref.once('value', function(snapshot) {
 			if( snapshot.val() != null ) {
 				console.log(snapshot.val());
-	      snapshot.ref.update({"status": "open","lastupdate" : gettimestamp(),"timeclose": gettimestamp(),"isnotified":true});
+	      snapshot.ref.update({"status": "Closed","lastupdate" : gettimestamp(),"timeclose": gettimestamp(),"isnotified":true});
 	      $.post("/notify",{issueid: key},function(data) { 
 	      	console.log(status); 
 	      	if(data) {
-	      		snapshot.ref.update({"isnotified":true});
-	      		location.reload();
-	      		showresult("The ticket hes been closed and the user has been notified ");
+	      		snapshot.ref.update({"isnotified":true}, function(data) {
+	      			if(data) {
+	      				location.reload();
+	      				showresult("The ticket hes been closed and the user has been notified ");
+	      			}
+	      		});
 	      	} else{
 	      		showresult("Error ocurred, try again");
 	      	}
