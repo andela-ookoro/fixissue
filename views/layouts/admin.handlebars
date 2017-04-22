@@ -28,6 +28,12 @@
     var firedbase =firebase.initializeApp(config);
     </script>
     <script src="/js/utility.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <style >
+      .activelink {
+           border-bottom: 4px solid #FF8040;  
+      }
+    </style>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" >
 
@@ -61,7 +67,7 @@
   <div class="alert alert-success" id="regTitle">
     <div class="loader col-centered" style="left:50%"></div>
   </div>
-{{{body}}}
+  {{{body}}}
 </div>
 
 

@@ -1,0 +1,8 @@
+{
+  "name": "Issue Tracker",
+  "short_name": "Issue Tracker",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "gcm_sender_id": "103953800507"
+}

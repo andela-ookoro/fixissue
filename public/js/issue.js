@@ -5,7 +5,7 @@ $(document).ready(function(){
          Userref = firebase.database().ref('ist/user'),
          usercontact,
          uid=$('input#uid').val();
-      console.log(valueSelected);
+      //console.log(valueSelected);
       Userref.orderByChild('uid').equalTo(uid).on("value", function(snapshot) {
         //console.log(snapshot.val());
         snapshot.forEach(function(data) {
@@ -42,7 +42,7 @@ $(document).ready(function(){
         "fixernote" : "",
         "priority" : $("#priority").val()
       };
-  console.log(newissue);
+  //console.log(newissue);
   Issueref.push(newissue).then(function(issue) {
     window.location.href ='/myreport';
   }). catch(function(error) {

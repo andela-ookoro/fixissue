@@ -1,12 +1,10 @@
  
  $(document).ready(function(){  
     window.onload = function() {
-        var url = window.location;
-        $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
-        $('ul.nav a').filter(function() {
-             return this.href == url;
-        }).parent().addClass('active');
+        setactivelink();
         showusername();
+        firebasenotification();
+        console.log(firebase.auth().currentUser);
     };
 });
 function gettimestamp() {
@@ -60,14 +58,14 @@ var getdept = function(uid,cb) {
   Userref.orderByChild('uid').equalTo(uid).on("value", function(snapshot) {
      snapshot.forEach(function(data) {
         department = data.val().departments;
-      console.log(department);
+      //console.log(department);
        cb(department);
     });
   });
 }
 
 var showresult =function(text) {
-    console.log("showresult");
+    //console.log("showresult");
     $("#regTitle").html("<strong>Info!</strong> " + text + ".");
     
 }
@@ -78,5 +76,65 @@ var showusername = function() {
 }
 
 var setactivelink = function(){
+    $("li").removeClass("activelink");
+        let url = window.location.toString();
+        if( url.includes("myreport")) {
+            $('a[href$="\myreport"]').addClass('activelink');
+        }else if( url.includes("myqueue")) {
+            $('a[href$="\myqueue"]').addClass('activelink');
+        }else if( url.includes("reportissue")) {
+            $('a[href$="\reportissue"]').addClass('activelink');
+        }else if( url.includes("openissue")) {
+            $('a[href$="\openissue"]').addClass('activelink');
+        }else if( url.includes("closeissue")) {
+            $('a[href$="\closeissue"]').addClass('activelink');
+        }else if( url.includes("profile")) {
+            $('a[href$="\profile"]').addClass('activelink');
+        }else if( url.includes("signout")) {
+            $('a[href$="\signout"]').addClass('activelink');
+        }
+}
 
+var firebasenotification =function() {
+  firebase.messaging().getToken().then(function(currentToken) {
+    
+    if (currentToken) {
+      console.log('Got FCM device token:', currentToken);
+      // Saving the Device Token to the datastore.
+      firebase.database().ref('/ist/fcmTokens').child(currentToken)
+               .set(firebase.auth().currentUser.uid);
+    } else {
+      // Need to request permissions to show notifications.
+      requestNotificationsPermissions();
+    }
+  }).catch(function(error) {
+    console.error('Unable perform fb notify.', error);
+  });
+  console.log(firebase.auth().currentUser.uid);
+}
+
+var requestNotificationsPermissions = function() {
+  console.log('Requesting notifications permission...');
+  firebase.messaging().requestPermission().then(function() {
+    // Notification permission granted.
+    saveMessagingDeviceToken();
+  }).catch(function(error) {
+    console.error('Unable to get permission to notify.', error);
+  });
+}
+
+var saveMessagingDeviceToken = function() {
+  firebase.messaging().getToken().then(function(currentToken) {
+    if (currentToken) {
+      console.log('Got FCM device token:', currentToken);
+      // Saving the Device Token to the datastore.
+      firebase.database().ref('/fcmTokens').child(currentToken)
+          .set({ token :firebase.auth().currentUser.uid, uid : $('input#uid').val()});
+    } else {
+      // Need to request permissions to show notifications.
+      requestNotificationsPermissions();
+    }
+  }).catch(function(error){
+    console.error('Unable to get messaging token.', error);
+  });
 }

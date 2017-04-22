@@ -3,6 +3,7 @@ $(document).ready(function(){
  			Issueref = firebase.database().ref('ist/issue'),
  			curissue,
  			issuecount=0 ;
+ 	 Issueref.off();
  	// using callback
 		getdept(uid,function(department) {
 			Issueref.orderByChild('department').equalTo(department).on("value", function(snapshot) {
@@ -35,7 +36,7 @@ $(document).ready(function(){
  		userRef.orderByChild('departments').equalTo(department).on("value", function(snapshot) {
 		  snapshot.forEach(function(data) {
 		   	curuser = data.val(); 	
-		   	console.log(curuser);
+		   	//console.log(curuser);
 		   	$('#assignee')
 	         .append($("<option></option>")
 	                    .attr("value",curuser.uid)
@@ -134,7 +135,7 @@ var getUsername = function(uid,cb) {
    Userref.orderByChild('uid').equalTo(uid).on("value", function(snapshot) {
       snapshot.forEach(function(data) {
       	user = data.val().name;
-        console.log(user);
+       // console.log(user);
         cb(user);
       });
     });

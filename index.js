@@ -138,6 +138,14 @@ app.get('/myreport',function(req,res){
 	}
 });
 
+app.get('/',function(req,res){
+	if(req.session.department) {
+		res.render('myreport',{ layout: 'admin' ,'uid' : req.session.uid,'uname' :req.session.uname});
+	} else {
+		res.render('myreport',{'uid' : req.session.uid,'uname' :req.session.uname});
+	}
+});
+
 var adminOnly=function(req, res, next){
 	if(req.session.uid  && req.session.department) return next();
 
@@ -251,5 +259,5 @@ app.use(function(err, req, res, next){
 
 
 app.listen(app.get('port'),function() {
-    console.log('Document Tracker running at  http://localhost:' + app.get('port'));
+    console.log('Issue Tracker running at  http://localhost:' + app.get('port'));
 });

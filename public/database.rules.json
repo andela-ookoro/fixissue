@@ -1,0 +1,14 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "ist": {
+      "issue": {
+        ".indexOn": "uid"
+      },
+      "user": {
+        ".indexOn": "uid"
+      }
+    }
+  }
+}
