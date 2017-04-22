@@ -37,7 +37,9 @@ app.use(express.static(__dirname + '/public'));
 //define route
 app.post('/setsession', function(req,res){
 		req.session.uid= req.body.uid;
+		console.log(req.body.uid)
 		req.session.save();
+
 		let Userref = firebase.database().ref('ist/user');
 		Userref.orderByChild("uid").equalTo(req.body.uid).once("value", function(snapshot) {
 			var value = snapshot.val();

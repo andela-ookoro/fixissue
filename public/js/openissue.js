@@ -3,7 +3,7 @@ $(document).ready(function(){
  			Issueref = firebase.database().ref('ist/issue'),
  			curissue,
  			issuecount=0 ;
- 	 Issueref.off();
+ 	 //Issueref.off();
  	// using callback
 		getdept(uid,function(department) {
 			Issueref.orderByChild('department').equalTo(department).on("value", function(snapshot) {

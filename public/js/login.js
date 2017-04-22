@@ -269,7 +269,7 @@ $(document).ready(function(){
     event.preventDefault();
     firebase.auth().signInWithEmailAndPassword($('#email').val(), $('#password').val())
     .then(function(user) {
-      let curuser = firebase.auth().currentUser;
+      let curuser = user;
       if (curuser) {
         let Userref = firebase.database().ref('ist/user');
         Userref.orderByChild("uid").equalTo(curuser.uid).once("value", function(snapshot) {
