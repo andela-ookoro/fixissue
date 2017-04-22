@@ -51,10 +51,7 @@ $(document).ready(function(){
       if(currentUser) {
         //////////////////
         console.log(user.uid);
-        $.post("/setsession", {uid: user.uid}, function(responseData){ 
-            console.log(responseData, 'responseData'); 
-              if(responseData) {
-                    userRef = firebase.database().ref('ist/user');
+        userRef = firebase.database().ref('ist/user');
 
                     var  newuser = {
                       "name" : $('#name').val(),
@@ -63,16 +60,21 @@ $(document).ready(function(){
                       "email" : $('#email').val(),
                       "phone" :$('#phone').val()
                     };
-                    userRef.push(newuser).then(function(user) {
-                      window.location.href = '/myreport';
+                    userRef.push(newuser).then(function(usert) {
+                  $.post("/setsession", {uid:user.uid}, function(responseData){ 
+                    console.log(responseData, 'responseData'); 
+                      if(responseData) {
+                            window.location.href = '/myreport';
+                      }
+                  });
+                      
                     }). catch(function(error) {
                       showresult("Error occured, please try again");
                      // $("#result").text = "Error occures, please try again";
                       //console.error('Sign Out Error', error);
                       
-                    });
-              }
         });
+       
       }
 
     })

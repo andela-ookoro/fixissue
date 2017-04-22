@@ -37,31 +37,34 @@ app.use(express.static(__dirname + '/public'));
 //define route
 app.post('/setsession', function(req,res){
 		req.session.uid= req.body.uid;
-		console.log(req.body.uid)
+		console.log('tst' + req.body.uid)
 		req.session.save();
-
 		let Userref = firebase.database().ref('ist/user');
 		Userref.orderByChild("uid").equalTo(req.body.uid).once("value", function(snapshot) {
-			var value = snapshot.val();
-			var keys = Object.keys(value);
-			var userinfo =value[keys[0]];
-			req.session.uname =userinfo.name;
-			req.session.save();
-			if (userinfo.role) {
-          req.session.department =userinfo.departments;
-          req.session.save();
-          console.log(req.session);
-          if (req.session.department){
-          	res.send('success');
-          }
-          
-          console.log('after' + req.session.department);
-       } else{
-       	 res.send('success');
-       	}
+			if (snapshot){
+				var value = snapshot.val();
+				var keys = Object.keys(value);
+				var userinfo =value[keys[0]];
+				req.session.uname =userinfo.name;
+				req.session.save();
+				if (userinfo.role) {
+	          req.session.department =userinfo.departments;
+	          req.session.save();
+	          //console.log(req.session);
+	          if (req.session.department){
+	          	res.send('success');
+	          }
+	          
+	          console.log('after' + req.session.department);
+	       } else{
+	       	 res.send('success');
+	       	}
+				}
+			
 			//console.log(value[keys[0]].name);
 			//res.render('openissue');
-    });
+   });
+  
 });
 
 app.get('/signout', function(req,res) {
