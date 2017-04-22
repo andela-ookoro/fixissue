@@ -1,6 +1,7 @@
  
  $(document).ready(function(){  
     window.onload = function() {
+      
         setactivelink();
         showusername();
         firebasenotification();
@@ -135,4 +136,20 @@ var requestNotificationsPermissions = function() {
   });
 }
 
+var synnotification = function() {
+  /** function to notify user and update
+  var issueRef = firebase.database().ref("ist/issue");
+
+  issueRef.on("child_added", function(data, prevChildKey) {
+     var issue = data.val();
+     if( issue.assignto == $('#uid').val()) {
+        //$('a[href$="\myqueue"]').addClass('activelink')
+     } else
+     console.log("name: " + newPlayer.name);
+     console.log("age: " + newPlayer.age);
+     console.log("number: " + newPlayer.number);
+     console.log("Previous Player: " + prevChildKey);
+  });
+ **/
+}
 

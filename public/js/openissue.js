@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
- 	let uid= $('input#uid').val(),
+ 	let uid= $('#uid').val(),
  			Issueref = firebase.database().ref('ist/issue'),
  			curissue,
  			issuecount=0 ;
