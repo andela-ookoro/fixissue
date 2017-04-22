@@ -18,15 +18,13 @@ exports.sendNotifications = functions.database.ref('/ist/issue/{issueId}').onWri
 
   if (snapshot.val().status == 'Closed') {
     //get userid
-    let tokenRef = firebase.database().ref('ist/fcmTokens');
+    let tokenRef = firebase.database().ref('/fcmTokens');
     const reporterId = snapshot.val().raisedby;
     // get get report token
     let reporttoken;
-    Userref.orderByChild("uid").equalTo(reporterId).once("value", function(snapshot) {
+    tokenRef.once("value", function(snapshot) {
       var value = snapshot.val();
-      var keys = Object.keys(value);
-      var userinfo =value[keys[0]];
-      reporttoken = userinfo.token;   
+      reporttoken =value[reporterId];  
     });
     // Notification details.
     const text = snapshot.val().comment;

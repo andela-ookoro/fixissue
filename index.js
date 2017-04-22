@@ -189,16 +189,18 @@ app.post('/notify', function(req, res){
 	let key =req.body.issueid,
 			subject,
 			notifymeans,
-			notifyvalue;
+			notifyvalue,
+			note;
 	let Issueref = firebase.database().ref('ist/issue').child(key);
   Issueref.once('value', function(snapshot) {
 		if( snapshot.val() != null ) {
 			subject =snapshot.val().subject;
+			note =snapshot.val().comment;
 			notifymeans =snapshot.val().sendernotificationmeans;
 			notifyvalue=snapshot.val().notificationvalue;
 
 			if (notifymeans == 'email') {
-				res.render('mail/notifymail',	{ layout: null, subject: subject },
+				res.render('mail/notifymail',	{ layout: null, subject: subject ,note : note},
 				function(err,html){
 					if( err ) console.log('error in email template');
 
@@ -215,10 +217,9 @@ app.post('/notify', function(req, res){
 				);
 			} else if (notifymeans == 'phone') {
 				console.log(notifyvalue);
-				let text = 'IST notification \n' +
-									'Thanks for using our service to fix your bug.'+
-									'We have successfully fix you bug on the subject: '+
-									subject;
+				let text = 'IST notification >> Your issue has been resolved.' +
+									'subject : '+ subject 
+									+ 'note : ' + note;
 				console.log(text);
 				/** nexmo whitelist erro
 				nexmo.message.sendSms(2348066112787, 2348027313450, text, {type: 'unicode'},

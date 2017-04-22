@@ -4,7 +4,6 @@
         setactivelink();
         showusername();
         firebasenotification();
-        console.log(firebase.auth().currentUser);
     };
 });
 function gettimestamp() {
@@ -97,27 +96,15 @@ var setactivelink = function(){
 
 var firebasenotification =function() {
   firebase.messaging().getToken().then(function(currentToken) {
-    
     if (currentToken) {
       console.log('Got FCM device token:', currentToken);
       // Saving the Device Token to the datastore.
-      firebase.database().ref('/ist/fcmTokens').child(currentToken)
-               .set(firebase.auth().currentUser.uid);
+      firebase.database().ref('/fcmTokens').child($('input#uid').val())
+               .set(currentToken);
     } else {
       // Need to request permissions to show notifications.
       requestNotificationsPermissions();
     }
-  }).catch(function(error) {
-    console.error('Unable perform fb notify.', error);
-  });
-  console.log(firebase.auth().currentUser.uid);
-}
-
-var requestNotificationsPermissions = function() {
-  console.log('Requesting notifications permission...');
-  firebase.messaging().requestPermission().then(function() {
-    // Notification permission granted.
-    saveMessagingDeviceToken();
   }).catch(function(error) {
     console.error('Unable to get permission to notify.', error);
   });
@@ -128,8 +115,8 @@ var saveMessagingDeviceToken = function() {
     if (currentToken) {
       console.log('Got FCM device token:', currentToken);
       // Saving the Device Token to the datastore.
-      firebase.database().ref('/fcmTokens').child(currentToken)
-          .set({ token :firebase.auth().currentUser.uid, uid : $('input#uid').val()});
+      firebase.database().ref('/fcmTokens').child($('input#uid').val())
+               .set(currentToken);
     } else {
       // Need to request permissions to show notifications.
       requestNotificationsPermissions();
@@ -138,3 +125,14 @@ var saveMessagingDeviceToken = function() {
     console.error('Unable to get messaging token.', error);
   });
 }
+var requestNotificationsPermissions = function() {
+  console.log('Requesting notifications permission...');
+  firebase.messaging().requestPermission().then(function() {
+    // Notification permission granted.
+    saveMessagingDeviceToken();
+  }).catch(function(error) {
+    console.error('Unable to get permission to notify.', error);
+  });
+}
+
+

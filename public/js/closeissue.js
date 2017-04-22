@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
- 	let uid= $('input#uid').val(),
+ 	let uid= $('input#uid').val(),$('#uid').val()
  			department =localStorage.getItem('department'),
  			Issueref = firebase.database().ref('ist/issue'),
  			curissue,
