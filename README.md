@@ -40,8 +40,12 @@
 
 
 *  Install the app's backend dependencies.Open node.js, naviagte to the directory that contain the application ,then enter the command below:
+  * install dependencies
+
   `npm install `
 * To start the application enter the command below:
+  * start server
+
   `node.js index.js `
 * If the command run  successfully, node.js would display the text below.
 
@@ -50,7 +54,9 @@
   Issue Tracker running at  http://localhost:1142
 
   ```
-
+* Open the  **`[link](http://localhost:1142)`** on a browser to view the application.
+  [Google chrome ](https://www.google.com/chrome/) is recommended 
+  
 ## Description of the Web pages 
 * Javasccript files  are in the public/js folder
 * CsS files  are in the public/cc folder
