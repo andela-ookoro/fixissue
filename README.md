@@ -54,9 +54,9 @@
   Issue Tracker running at  http://localhost:1142
 
   ```
-* Open the  **`[link](http://localhost:1142)`** on a browser to view the application.
+* Open the  **[link](http://localhost:1142)** on a browser to view the application.
   [Google chrome ](https://www.google.com/chrome/) is recommended 
-  
+
 ## Description of the Web pages 
 * Javasccript files  are in the public/js folder
 * CsS files  are in the public/cc folder
