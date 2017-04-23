@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
- 	let uid= $('input#uid').val(),$('#uid').val()
+ 	let uid= $('#uid').val(),
  			department =localStorage.getItem('department'),
  			Issueref = firebase.database().ref('ist/issue'),
  			curissue,
@@ -10,7 +10,7 @@ $(document).ready(function(){
 	  //console.log(snapshot.val());
 		snapshot.forEach(function(data) {
 			curissue = data.val();
-		 	if (curissue.status != 'Closed') {
+		 	if (curissue.status == 'Closed') {
 		 		issuecount +=1;
 		 		displayIssue(data.key,curissue.priority,curissue.raisedby,curissue.subject,curissue.dateraised,curissue.description,
 		        					curissue.department,curissue.status,curissue.lastupdate,curissue.assignto,curissue.assigneeName);
