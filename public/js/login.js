@@ -26,7 +26,7 @@ $(document).ready(function(){
               if(userinfo.role) {
                window.location.href = '/openissue';
               } else {
-                window.location.href = '/issuelog';
+                window.location.href = '/myreport';
               }
             }
           });
@@ -91,7 +91,7 @@ $(document).ready(function(){
               if(userinfo.role) {
                window.location.href = '/openissue';
               } else {
-                window.location.href = '/issuelog';
+                window.location.href = '/myreport';
               }
             }
           });
@@ -156,7 +156,7 @@ $(document).ready(function(){
               if(userinfo.role) {
                window.location.href = '/openissue';
               } else {
-                window.location.href = '/issuelog';
+                window.location.href = '/myreport';
               }
             }
           });
@@ -221,7 +221,7 @@ $(document).ready(function(){
               if(userinfo.role) {
                window.location.href = '/openissue';
               } else {
-                window.location.href = '/issuelog';
+                window.location.href = '/myreport';
               }
             }
           });
@@ -283,7 +283,7 @@ $(document).ready(function(){
                   window.location.href = '/openissue';
                   console.log('isadmin');
                  } else {
-                    window.location.href = '/issuelog';
+                    window.location.href = '/myreport';
                     }
               }
           });
