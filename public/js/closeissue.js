@@ -16,17 +16,17 @@ $(document).ready(function(){
 		        					curissue.department,curissue.status,curissue.lastupdate,curissue.assignto,curissue.assigneeName);
 		      
 		       console.log(data.val());
-		  	}  	
-		  });
-		});
+		  }  	
+		 });
 		if (issuecount == 0) {
 			showresult("There are no closed ticket ");
 		} else {
 		 	showresult("There " + ((issuecount == 1) ? "is ":"are " )+ issuecount + " closed ticket");
 		}
+	});
+		
  	});
- 	i
- 
+ 	
 
  	// load assignee select
  	let userRef = firebase.database().ref('ist/user'),
