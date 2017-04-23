@@ -100,8 +100,12 @@ var firebasenotification =function() {
     if (currentToken) {
       console.log('Got FCM device token:', currentToken);
       // Saving the Device Token to the datastore.
-      firebase.database().ref('/fcmTokens').child($('#uid').val())
+      let uid= $('#uid').val();
+      if (uid) {
+        firebase.database().ref('/fcmTokens').child(uid)
                .set(currentToken);
+      }
+      
     } else {
       // Need to request permissions to show notifications.
       requestNotificationsPermissions();
@@ -116,8 +120,11 @@ var saveMessagingDeviceToken = function() {
     if (currentToken) {
       console.log('Got FCM device token:', currentToken);
       // Saving the Device Token to the datastore.
-      firebase.database().ref('/fcmTokens').child($('#uid').val())
+      let uid= $('#uid').val();
+      if (uid) {
+        firebase.database().ref('/fcmTokens').child(uid)
                .set(currentToken);
+      }
     } else {
       // Need to request permissions to show notifications.
       requestNotificationsPermissions();
