@@ -279,7 +279,7 @@ $(document).ready(function(){
           $.post("/setsession", {uid: curuser.uid}, function(responseData){ 
             console.log(responseData, 'responseData'); 
               if(responseData) {
-                if (data.val().role) {
+                if (userinfo.role) {
                   window.location.href = '/openissue';
                   console.log('isadmin');
                  } else {
