@@ -1,10 +1,8 @@
 $(document).ready(function(){ 
  	let uid= $('#uid').val(),
- 			department =localStorage.getItem('department'),
  			Issueref = firebase.database().ref('ist/issue'),
  			curissue,
  			issuecount=0 ;
- 			console.log(department);
  	getdept(uid,function(department) { 
  		Issueref.orderByChild('department').equalTo(department).on("value", function(snapshot) {
 	  //console.log(snapshot.val());
@@ -28,45 +26,6 @@ $(document).ready(function(){
  	});
  	
 
- 	// load assignee select
- 	let userRef = firebase.database().ref('ist/user'),
- 			curuser;
- 	userRef.orderByChild('departments').equalTo(department).on("value", function(snapshot) {
-	  snapshot.forEach(function(data) {
-	   	//curuser = data.val(); 	
-	   	console.log(curuser);
-	   	$('#assignee')
-         .append($("<option></option>")
-                    .attr("value",curuser.uid)
-                    .text(curuser.name)); 
-	  });
-	});
-
- 	//process assign form
- 	$("#setAssign").submit(function(event) {
-    /* stop form from submitting normally */
-    event.preventDefault();
-    	//collect the issue id 
-		let issueid = $('#issueid').val();
-    // set assignto in db
-    let Issueref = firebase.database().ref('ist/issue').child(issueid),
-    		assignee = $('#assignee').val();
-    		assigneeName = $('#assignee option:selected').html();
-	  Issueref.once('value', function(snapshot) {
-			if( snapshot.val() != null ) {
-				console.log(snapshot.val());
-	      snapshot.ref.update({"assignto": assignee,"assigneeName" :assigneeName,"lastupdate" : gettimestamp(),
-	      	"status": "Assigned"});
-		  }
-		});
-		/** change button to label
-	  $('#btn'+ issueid).hide();
-	  $('#lbl'+ issueid).text(assigneeName)
-	  $('#lbl'+ issueid).show();
-	  **/
-	  location.reload();
-
-  });
 
  	//process comment form
  	$("#addcomment").submit(function(event) {

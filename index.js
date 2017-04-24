@@ -187,7 +187,8 @@ const nexmo = new Nexmo({
 });
 **/
 var Jusibe = require('jusibe');
-var jusibe = new Jusibe("b033fe3cf30d7873f208a767d26054c0", "4e07476fa37923e1980b51f05b94747b");
+var jusibe = new Jusibe("3e6c952a3ed703277c13ab9248fba485","d21ba021e2ab25139b7ff622d3b0b62a");
+//var jusibe = new Jusibe("b033fe3cf30d7873f208a767d26054c0", "4e07476fa37923e1980b51f05b94747b");
 app.post('/notify', function(req, res){
 
 
@@ -206,25 +207,25 @@ app.post('/notify', function(req, res){
 
 			if (notifymeans == 'email') {
 				res.render('mail/notifymail',	{ layout: null, subject: subject ,note : note},
-				function(err,html){
-					if( err ) console.log('error in email template');
+					function(err,html){
+						if( err ) console.log('error in email template');
 
-						mailTransport.sendMail({
-								from: '"Issue Tracker ": okorocelestine@gmail.com',
-								to: notifyvalue,
-								subject: 'Your issue has been resolved',
-								html: html,
-								generateTextFromHtml: true
-							}, function(err){
-								if(err) console.error('Unable to send confirmation: '+ err.stack);
+							mailTransport.sendMail({
+									from: '"Issue Tracker ": okorocelestine@gmail.com',
+									to: notifyvalue,
+									subject: 'Your issue has been resolved',
+									html: html,
+									generateTextFromHtml: true
+								}, function(err){
+									if(err) console.error('Unable to send confirmation: '+ err.stack);
 						});
 					}
 				);
 			} else if (notifymeans == 'phone') {
 				console.log(notifyvalue);
 				let text = 'IST notification >> Your issue has been resolved.' +
-									'subject : '+ subject 
-									+ 'note : ' + note;
+									' SUBJECT : '+ subject 
+									+ ' NOTE : ' + note;
 				console.log(text);
 				/** nexmo whitelist erro
 				nexmo.message.sendSms(2348066112787, 2348027313450, text, {type: 'unicode'},
@@ -243,11 +244,13 @@ app.post('/notify', function(req, res){
 			    } else {
 			      console.log(err);
 			    }
+
 			  });
 			}
 
 	  }
 	});
+	res.send('success');
 });
 
 // 404 catch-all handler (middleware)

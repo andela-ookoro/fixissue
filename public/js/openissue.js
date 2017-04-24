@@ -163,8 +163,8 @@ var closeissue = function(key) {
 	      $.post("/notify",{issueid: key},function(data) { 
 	      	console.log(status); 
 	      	if(data) {
-	      		snapshot.ref.update({"isnotified":true}, function(data) {
-	      			if(data) {
+	      		snapshot.ref.update({"isnotified":true}, function(data1) {
+	      			if(data1) {
 	      				location.reload();
 	      				showresult("The ticket hes been closed and the user has been notified ");
 	      			}
