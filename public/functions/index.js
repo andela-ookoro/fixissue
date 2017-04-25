@@ -9,7 +9,7 @@ admin.initializeApp(functions.config().firebase);
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-exports.sendNotifications = functions.database.ref('/ist/issue/{issueId}').onWrite(event => {
+exports.sendNotifications = functions.database.ref('/ist/issue/').onWrite(event => {
   const snapshot = event.data;
   // Only send a notification when a message has been created.
   if (snapshot.previous.val()) {
@@ -26,6 +26,7 @@ exports.sendNotifications = functions.database.ref('/ist/issue/{issueId}').onWri
       var value = snapshot.val();
       reporttoken =value[reporterId];  
     });
+
     // Notification details.
     const text = snapshot.val().comment;
     const payload = {
