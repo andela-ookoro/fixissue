@@ -165,8 +165,8 @@ var closeissue = function(key) {
 	      	if(data) {
 	      		snapshot.ref.update({"isnotified":true}, function(data1) {
 	      			if(data1) {
-	      				location.reload();
 	      				showresult("The ticket hes been closed and the user has been notified ");
+	      				location.reload();	      				
 	      			}
 	      		});
 	      	} else{
